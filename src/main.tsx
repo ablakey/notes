@@ -1,11 +1,17 @@
 import { createRoot } from "react-dom/client";
-import { Button } from "antd";
+import { Header } from "./Header";
+import { DayTracker } from "./DayTracker";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 
 function App() {
-  return <Button type="primary">Click</Button>;
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <Header />
+      <DayTracker />
+    </div>
+  );
 }
 
 root.render(<App />);
