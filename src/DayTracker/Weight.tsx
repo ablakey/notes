@@ -1,6 +1,6 @@
-import { InputNumber, Statistic } from "antd";
+import { Button, InputNumber, Statistic, Typography } from "antd";
 import { Section } from "../components/Section";
-import { ArrowUpOutlined } from "@ant-design/icons";
+import { ArrowUpOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 export function Weight() {
@@ -9,7 +9,16 @@ export function Weight() {
   return (
     <Section title="Weight" style={{ height: 58 }}>
       {editWeight ? (
-        <InputNumber type="number" />
+        <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+          <Typography.Text>Today's Weight:</Typography.Text>
+          <InputNumber type="number" />
+          <Button icon={<CheckOutlined />} style={{ color: "#3f8600" }} />
+          <Button
+            icon={<CloseOutlined />}
+            style={{ color: "#cf1322" }}
+            onClick={() => setEditWeight(false)}
+          />
+        </div>
       ) : (
         <div
           onClick={() => setEditWeight(true)}

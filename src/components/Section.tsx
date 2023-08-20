@@ -7,7 +7,7 @@ export function Section(props: { title: string; children: ReactNode; style?: CSS
       style={{ border: "1px solid #f0f0f0", borderRadius: 8, marginInline: 0, ...props.style }}
     >
       <legend>
-        <Typography.Text>{props.title}</Typography.Text>
+        <Typography.Text style={{ color: "#999" }}>{props.title}</Typography.Text>
       </legend>
       {props.children}
     </fieldset>
