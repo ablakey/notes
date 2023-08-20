@@ -1,4 +1,5 @@
-import { Typography } from "antd";
+import Typography from "antd/es/typography/Typography";
+import Text from "antd/es/typography/Text";
 import { CSSProperties, ReactNode } from "react";
 
 export function Section(props: { title: string; children: ReactNode; style?: CSSProperties }) {
@@ -7,7 +8,7 @@ export function Section(props: { title: string; children: ReactNode; style?: CSS
       style={{ border: "1px solid #f0f0f0", borderRadius: 8, marginInline: 0, ...props.style }}
     >
       <legend>
-        <Typography.Text style={{ color: "#999", fontSize: 16 }}>{props.title}</Typography.Text>
+        <Text style={{ color: "#999", fontSize: 16 }}>{props.title}</Text>
       </legend>
       {props.children}
     </fieldset>
