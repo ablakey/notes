@@ -1,17 +1,17 @@
-import { Button, InputNumber, Statistic, Typography } from "antd";
+import { Button, InputNumber } from "antd";
 import { Section } from "../components/Section";
 import { ArrowUpOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { Statistic } from "../components/Statistic";
 
 export function Weight() {
   const [editWeight, setEditWeight] = useState(false);
 
   return (
-    <Section title="Weight" style={{ height: 58 }}>
+    <Section title="Weight" style={{ display: "flex", justifyContent: "space-around" }}>
       {editWeight ? (
-        <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
-          <Typography.Text>Today's Weight:</Typography.Text>
-          <InputNumber type="number" />
+        <div style={{ display: "flex", gap: 4, alignItems: "center", width: 152 }}>
+          <InputNumber type="number" style={{ width: 80 }} />
           <Button icon={<CheckOutlined />} style={{ color: "#3f8600" }} />
           <Button
             icon={<CloseOutlined />}
@@ -22,18 +22,12 @@ export function Weight() {
       ) : (
         <div
           onClick={() => setEditWeight(true)}
-          style={{ display: "flex", justifyContent: "space-around" }}
+          style={{ width: 152, display: "flex", justifyContent: "center" }}
         >
-          <Statistic value={260} precision={1} suffix="lb" />
-          <Statistic
-            value={11.2}
-            precision={1}
-            valueStyle={{ color: "#3f8600" }}
-            prefix={<ArrowUpOutlined />}
-            suffix="lb"
-          />
+          <Statistic value={260} title="Today" suffix="lb" />
         </div>
       )}
+      <Statistic value={11.2} direction="Up" title="Total" suffix="lb" />
     </Section>
   );
 }

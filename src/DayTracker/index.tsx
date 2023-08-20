@@ -1,5 +1,6 @@
 import { CalorieStats } from "./CalorieStats";
 import { FoodList } from "./FoodList";
+import { Progress } from "./Progress";
 import { Weight } from "./Weight";
 
 export function DayTracker() {
@@ -8,6 +9,7 @@ export function DayTracker() {
       <CalorieStats />
       <FoodList />
       <Weight />
+      <Progress />
     </div>
   );
 }
