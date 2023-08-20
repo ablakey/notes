@@ -1,5 +1,5 @@
 import { AutoComplete, Card, Popconfirm, Tag } from "antd";
-import { Section } from "../components/Section";
+import { Section } from "./components/Section";
 
 function Food(props: { name: string }) {
   return (

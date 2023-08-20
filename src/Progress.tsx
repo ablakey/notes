@@ -1,5 +1,5 @@
-import { Section } from "../components/Section";
-import { Statistic } from "../components/Statistic";
+import { Section } from "./components/Section";
+import { Statistic } from "./components/Statistic";
 
 export function Progress() {
   return (

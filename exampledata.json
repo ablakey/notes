@@ -1,0 +1,16 @@
+{
+  "saved": 0,
+  "eaten": [],
+  "weightHistory": [],
+  "targetCalories": 2200,
+  "foodList": [
+    {
+      "name": "Egg",
+      "calories": 90
+    },
+    {
+      "name": "Bacon",
+      "calories": 10
+    }
+  ]
+}

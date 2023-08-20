@@ -1,5 +1,5 @@
 import { Card, Progress, Typography } from "antd";
-import { Section } from "../components/Section";
+import { Section } from "./components/Section";
 
 export function CalorieStats() {
   return (

@@ -1,8 +1,8 @@
 import { Button, InputNumber } from "antd";
-import { Section } from "../components/Section";
 import { ArrowUpOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import { Statistic } from "../components/Statistic";
+import { Section } from "./components/Section";
+import { Statistic } from "./components/Statistic";
 
 export function Weight() {
   const [editWeight, setEditWeight] = useState(false);
