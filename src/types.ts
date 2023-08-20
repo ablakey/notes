@@ -5,12 +5,12 @@ export type FoodItem = {
 
 export type TrackedFood = {
   name: string;
-  added: number; // posix
+  when: number; // posix
 };
 
 export type TrackedWeight = {
   weight: number;
-  added: number; // posix
+  when: number; // posix
 };
 
 export type TrackedData = {

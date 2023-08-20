@@ -7,8 +7,10 @@ import { Progress } from "./Progress";
 import { Weight } from "./Weight";
 import { Header } from "./Header";
 import { Login } from "./Login";
-import { fetchData } from "./ajax";
+import { fetchData, patchData } from "./ajax";
 import { TrackedData } from "./types";
+import { cloneDeep } from "lodash";
+import { getToday } from "./utils";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
@@ -19,6 +21,7 @@ function App() {
 
   const [error, setError] = useState("");
   const [trackedData, setTrackedData] = useState<TrackedData | null>(null);
+  const [currentDay, setCurentDay] = useState(getToday());
 
   useEffect(() => {
     if (token && gistId) {
@@ -35,6 +38,25 @@ function App() {
     }
   }, [token, gistId]);
 
+  async function addWeight(weight: number) {
+    if (!token || !gistId || !trackedData) {
+      return;
+    }
+
+    const data = cloneDeep(trackedData);
+    data.weightHistory.push({
+      weight: weight,
+      when: getToday(),
+    });
+
+    const result = await patchData(token, gistId, data);
+    if (typeof result === "string") {
+      setError(result);
+    } else {
+      setTrackedData(result);
+    }
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {trackedData ? (
@@ -43,7 +65,11 @@ function App() {
           <div style={{ margin: 8, display: "flex", flexDirection: "column", gap: 8 }}>
             <CalorieStats />
             <FoodList />
-            <Weight />
+            <Weight
+              day={currentDay}
+              weightHistory={trackedData.weightHistory}
+              onAddWeight={addWeight}
+            />
             <Progress />
           </div>
         </>
