@@ -2,10 +2,9 @@
   "name": "foodtracker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "parcel build --public-url ./ --no-source-maps"
+    "build": "rollup ./src/main.tsx --file bundle.js --config rollup.config.js"
   },
   "author": "Andrew Blakey",
   "license": "MIT",
@@ -50,6 +49,7 @@
     "parcel": "^2.9.3",
     "prettier": "^3.0.2",
     "process": "^0.11.10",
+    "rollup": "^3.28.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {
