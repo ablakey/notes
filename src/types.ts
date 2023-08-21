@@ -1,22 +1,16 @@
-export type FoodItem = {
+export type FoodEaten = {
   name: string;
   calories: number;
-};
-
-export type TrackedFood = {
-  name: string;
-  when: number; // posix
+  when: number;
 };
 
 export type TrackedWeight = {
   weight: number;
-  when: number; // posix
+  when: number;
 };
 
 export type TrackedData = {
-  saved: number; // posix
-  eaten: TrackedFood[];
-  weightHistory: TrackedWeight[];
+  foods: FoodEaten[];
+  weights: TrackedWeight[];
   targetCalories: number;
-  foodList: FoodItem[];
 };

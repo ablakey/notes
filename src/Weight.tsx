@@ -8,20 +8,20 @@ import { TrackedWeight } from "./types";
 export function Weight(props: {
   day: number;
   onAddWeight: (weight: number) => void;
-  weightHistory: TrackedWeight[];
+  weights: TrackedWeight[];
 }) {
   const [editWeight, setEditWeight] = useState(false);
   const [inputWeight, setInputWeight] = useState(0);
 
   const sortedWeights = useMemo(() => {
-    return [...props.weightHistory].sort((a, b) => a.when - b.when);
-  }, [props.weightHistory]);
+    return [...props.weights].sort((a, b) => a.when - b.when);
+  }, [props.weights]);
 
   const earliestWeight = sortedWeights[0].weight;
 
   const latestWeight = useMemo(() => {
     return sortedWeights.filter((w) => w.when <= props.day).at(-1)!.weight;
-  }, [props.weightHistory, props.day]);
+  }, [props.weights, props.day]);
 
   const weightDifference = latestWeight - earliestWeight;
 

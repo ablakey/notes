@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useLocalStorage } from "usehooks-ts";
 import { CalorieStats } from "./CalorieStats";
-import { FoodList } from "./FoodList";
+import { FoodsEaten } from "./FoodsEaten";
 import { Progress } from "./Progress";
 import { Weight } from "./Weight";
 import { Header } from "./Header";
@@ -11,6 +11,8 @@ import { fetchData, patchData } from "./ajax";
 import { TrackedData } from "./types";
 import { cloneDeep } from "lodash";
 import { getToday } from "./utils";
+import { Settings } from "./Settings";
+import { AddFood } from "./AddFood";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
@@ -19,9 +21,11 @@ function App() {
   const [token, setToken] = useLocalStorage<string | null>("token", null);
   const [gistId, setGistId] = useLocalStorage<string | null>("gistId", null);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [trackedData, setTrackedData] = useState<TrackedData | null>(null);
   const [currentDay, setCurentDay] = useState(getToday());
+
+  const currentDayFoodsEaten = (trackedData?.foods ?? []).filter((f) => f.when === currentDay);
 
   useEffect(() => {
     if (token && gistId) {
@@ -44,9 +48,9 @@ function App() {
     }
 
     const data = cloneDeep(trackedData);
-    data.weightHistory.push({
+    data.weights.push({
       weight: weight,
-      when: getToday(),
+      when: currentDay,
     });
 
     const result = await patchData(token, gistId, data);
@@ -57,6 +61,34 @@ function App() {
     }
   }
 
+  async function handleAddFood(name: string, calories: number) {
+    if (!token || !gistId || !trackedData) {
+      return;
+    }
+
+    const data = cloneDeep(trackedData);
+    data.foods.push({
+      name,
+      calories: calories,
+      when: currentDay,
+    });
+
+    const result = await patchData(token, gistId, data);
+    if (typeof result === "string") {
+      setError(result);
+    } else {
+      setTrackedData(result);
+    }
+  }
+
+  function handleLogout() {
+    setToken(null);
+    setGistId(null);
+    setError(null);
+    setTrackedData(null);
+    setCurentDay(getToday());
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {trackedData ? (
@@ -64,13 +96,12 @@ function App() {
           <Header />
           <div style={{ margin: 8, display: "flex", flexDirection: "column", gap: 8 }}>
             <CalorieStats />
-            <FoodList />
-            <Weight
-              day={currentDay}
-              weightHistory={trackedData.weightHistory}
-              onAddWeight={addWeight}
-            />
+            <FoodsEaten foods={currentDayFoodsEaten} />
+            <AddFood onAddFood={handleAddFood} />
+
+            <Weight day={currentDay} weights={trackedData.weights} onAddWeight={addWeight} />
             <Progress />
+            <Settings handleLogout={handleLogout} />
           </div>
         </>
       ) : (
