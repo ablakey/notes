@@ -63,9 +63,14 @@ export function AddFood(props: {
         }}
       >
         <Typography.Text style={{ color: "#999" }}>Add:</Typography.Text>
-        <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
+        <Input
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+          placeholder="Food name"
+        />
         <InputNumber
           pattern="\d*"
+          placeholder="Calories"
           value={newCalories}
           onChange={(e) => {
             if (isNumber(e) && isFinite(e)) {
