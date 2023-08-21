@@ -1,7 +1,8 @@
 import { Card, Progress, Typography } from "antd";
 import { Section } from "./components/Section";
 
-export function CalorieStats() {
+export function Calories(props: { current: number; max: number }) {
+  const percent = props.current / props.max;
   return (
     <Section title="Calories">
       <div
@@ -12,8 +13,8 @@ export function CalorieStats() {
           gap: 4,
         }}
       >
-        <Progress percent={30} showInfo={false} style={{ margin: 0 }} />
-        <Typography.Text>1230 of 9999</Typography.Text>
+        <Progress percent={percent * 100} showInfo={false} style={{ margin: 0 }} />
+        <Typography.Text>{`${props.current} of ${props.max}`}</Typography.Text>
       </div>
     </Section>
   );

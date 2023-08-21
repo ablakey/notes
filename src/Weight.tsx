@@ -32,11 +32,13 @@ export function Weight(props: {
       {editWeight ? (
         <div style={{ display: "flex", gap: 4, alignItems: "center", width: 152 }}>
           <InputNumber
+            autoFocus
             type="number"
             min={50}
             max={500}
             precision={1}
             style={{ width: 80 }}
+            pattern="\d*"
             onChange={(e) => {
               // Is always a number. We're not using high precision mode.
               if (typeof e === "number") {

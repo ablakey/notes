@@ -6,7 +6,8 @@ export function Header() {
     <div
       style={{
         backgroundColor: "#EEE",
-        padding: 12,
+        paddingTop: 12,
+        paddingBottom: 12,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
@@ -14,7 +15,11 @@ export function Header() {
       }}
     >
       <Button icon={<LeftOutlined />} />
-      <Typography.Text>Monday Oct 1 2023</Typography.Text>
+      <div style={{ width: 190, display: "flex", justifyContent: "center" }}>
+        <Typography.Text style={{ fontWeight: "bold", fontSize: 16 }}>
+          Monday Oct 1 2023
+        </Typography.Text>
+      </div>
       <Button icon={<RightOutlined />} />
     </div>
   );
