@@ -1,7 +1,8 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
+import { dayToDate } from "./utils";
 
-export function Header() {
+export function Header(props: { day: number; changeDay: (newDay: number) => void }) {
   return (
     <div
       style={{
@@ -14,13 +15,17 @@ export function Header() {
         width: "100%",
       }}
     >
-      <Button icon={<LeftOutlined />} />
+      <Button icon={<LeftOutlined />} onClick={() => props.changeDay(props.day - 1)} />
       <div style={{ width: 190, display: "flex", justifyContent: "center" }}>
         <Typography.Text style={{ fontWeight: "bold", fontSize: 16 }}>
-          Monday Oct 1 2023
+          {dayToDate(props.day).toLocaleDateString("en-US", {
+            weekday: "long",
+            day: "numeric",
+            month: "short",
+          })}
         </Typography.Text>
       </div>
-      <Button icon={<RightOutlined />} />
+      <Button icon={<RightOutlined />} onClick={() => props.changeDay(props.day + 1)} />
     </div>
   );
 }

@@ -40,8 +40,6 @@ export function AddFood(props: {
 
   const sortedFoods = [...Object.values(foodDict)].sort((a, b) => a.when - b.when);
 
-  console.log(sortedFoods);
-
   return (
     <Section title="Add Food" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>

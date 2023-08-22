@@ -24,7 +24,7 @@ function App() {
 
   const [error, setError] = useState<string | null>(null);
   const [trackedData, setTrackedData] = useState<TrackedData | null>(null);
-  const [currentDay, setCurentDay] = useState(getToday());
+  const [currentDay, setCurrentDay] = useState(getToday());
 
   const currentDayFoodsEaten = (trackedData?.foods ?? []).filter((f) => f.when === currentDay);
 
@@ -99,14 +99,14 @@ function App() {
     setGistId(null);
     setError(null);
     setTrackedData(null);
-    setCurentDay(getToday());
+    setCurrentDay(getToday());
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {trackedData ? (
         <>
-          <Header />
+          <Header day={currentDay} changeDay={setCurrentDay} />
           <div style={{ margin: 8, display: "flex", flexDirection: "column", gap: 8 }}>
             <Calories current={currentDayCalories} max={trackedData.targetCalories} />
             <Streaks gym={1} sleep={0} budget={5} />
