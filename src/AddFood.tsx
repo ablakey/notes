@@ -38,7 +38,10 @@ export function AddFood(props: {
     foodDict[key] = f;
   });
 
-  const sortedFoods = [...Object.values(foodDict)].sort((a, b) => a.when - b.when);
+  const sortedFoods = [...Object.values(foodDict)]
+    .sort((a, b) => b.when - a.when)
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(0, 20);
 
   return (
     <Section title="Add Food" style={{ display: "flex", flexDirection: "column", gap: 8 }}>
